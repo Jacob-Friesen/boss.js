@@ -1,6 +1,6 @@
 {
   "name": "boss.js",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Helps you code JavaScript at a boss level",
   "main": "boss.js",
   "scripts": {
@@ -25,6 +25,7 @@
   },
   "devDependencies": {
     "mocha": "1.21.4",
-    "chai": "1.9.1"
+    "chai": "1.9.1",
+    "jsdox": "~0.4.2"
   }
 }
