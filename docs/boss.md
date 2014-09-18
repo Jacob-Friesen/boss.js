@@ -17,6 +17,7 @@ Add a constant to the set of constants.
 
 **val**: *, The value of the constant. Can be anything; string, number, function etc.
 
+**Returns**: Boss.constants, Object containing the set of constants.
 
 
 ---

@@ -16,4 +16,4 @@ Driving Goals
 API
 ===
 
-Located [here](https://github.com/Jacob-Friesen/boss.js/blob/master/boss.js/docs/boss.md).
+Located [here](https://github.com/Jacob-Friesen/boss.js/blob/master/docs/boss.md).

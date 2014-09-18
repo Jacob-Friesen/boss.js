@@ -19,6 +19,8 @@ module.exports = (function() {
      *
      * @param {string} name The name of the accessor property for the constant.
      * @param {*} val The value of the constant. Can be anything; string, number, function etc.
+     *
+     * @returns {Boss.constants} Object containing the set of constants.
      */
     add: function(name, val) {
       Object.defineProperty(self.constants, name, {
