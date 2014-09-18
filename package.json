@@ -1,0 +1,30 @@
+{
+  "name": "boss.js",
+  "version": "0.0.1",
+  "description": "Helps you code JavaScript at a boss level",
+  "main": "boss.js",
+  "scripts": {
+    "test": "node runtest.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/Jacob-Friesen/boss.js.git"
+  },
+  "keywords": [
+    "javascript",
+    "js",
+    "utility",
+    "boss",
+    "harmony",
+    "es6"
+  ],
+  "author": "Jacob Friesen",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Jacob-Friesen/boss.js/issues"
+  },
+  "devDependencies": {
+    "mocha": "1.21.4",
+    "chai": "1.9.1"
+  }
+}
