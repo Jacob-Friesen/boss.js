@@ -35,5 +35,27 @@ module.exports = (function() {
     }
   };
 
+  /**
+   * @description
+   * Deconstruct a function by passing each of its values (returned as an array) as arguments.
+   * NOTE: Since only about 255 arguments can be passed into a function, this will fail when
+   *       returning more than that. Unlikely, but possible.
+   *
+   * @param {*[]} result The array of values returned from calling the callback.
+   * @param {function(resultsArray)} callback Called with the list of results from callback.
+   *
+   * @returns {Boss} The library.
+   */
+  self.deconstruct = function(result, callback) {
+    if (typeof(callback) !== 'function') {
+      throw('Error: You must define a callback.');
+    }
+
+    // For ease of use, need to be able to handle a single return not in an array.
+    callback.apply(this, Array.isArray(result) ? result : [result]);
+    
+    return self;
+  };
+
   return self;
 })();

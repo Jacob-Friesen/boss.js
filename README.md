@@ -1,6 +1,8 @@
 boss.js
 =======
 
+*All beta code is IE 9+ only*
+
 Helps you code JavaScript at a boss level. Provides a set of utilities intended to deal with JSs rough edges and provide close imitations of useful future [Harmony](http://wiki.ecmascript.org/doku.php?id=harmony:specification_drafts) proposals.
 
 Driving Goals
