@@ -57,5 +57,31 @@ module.exports = (function() {
     return self;
   };
 
+  /**
+   * @description
+   * Defines default values for a given function. When an argument is not sent or it is undefined,
+   * the value automatically becomes the default.
+   *
+   * @param {Object} (arguments 1 to n-1) The default values to assign to parameters.
+   * @param {function} (argument n) The function to wrap.
+   *
+   * @returns {function()} The function wrapped with default values.
+   */
+  self.defaults = function(/*default1 , ... , defaultN, callback*/) {
+    var outerArgs = Array.prototype.slice.call(arguments),
+        callback = outerArgs.slice(-1)[0],
+        defaults = outerArgs.slice(0, -1);
+
+    return function () {
+      var args = Array.prototype.slice.call(arguments);
+
+      defaults.forEach(function(val, index) {
+        args[index] = (typeof args[index] === 'undefined') ? defaults[index] : args[index]; 
+      });
+
+      return callback && callback.apply ? callback.apply(this, args) : null;
+    };
+  };
+
   return self;
 })();

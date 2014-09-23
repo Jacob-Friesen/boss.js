@@ -1,6 +1,6 @@
 {
   "name": "boss.js",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Helps you code JavaScript at a boss level",
   "main": "boss.js",
   "scripts": {

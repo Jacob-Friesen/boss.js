@@ -33,6 +33,19 @@ NOTE: Since only about 255 arguments can be passed into a function, this will fa
 
 **Returns**: Boss, The library.
 
+defaults((arguments, (argument) 
+-----------------------------
+Defines default values for a given function. When an argument is not sent or it is undefined,
+the value automatically becomes the default.
+
+**Parameters**
+
+**(arguments**: Object, 1 to n-1) The default values to assign to parameters.
+
+**(argument**: function, n) The function to wrap.
+
+**Returns**: function, The function wrapped with default values.
+
 
 ---
 

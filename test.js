@@ -97,4 +97,118 @@ describe('boss', function() {
       expect(b.deconstruct([1, 2, 3], function(a, b, c) {})).to.equal(b);
     });
   });
+
+  describe('defaults', function() {
+    it('should return a function that returns nothing when passed nothing', function() {
+      var callback = b.defaults();
+      expect(callback()).to.be.null;
+    });
+
+    // Basically, just a bunch of invalid inputs
+    describe('single argument', function() {
+      it('should return a function that returns nothing when passed a non function', function() {
+        [null, undefined, {}, 'test'].forEach(function(passing) {
+          var callback = b.defaults(passing);
+          expect(callback()).to.be.null;
+        });
+      });
+
+      it('should not modify a function when only it is passed in', function() {
+        var value1 = false;
+        var callback = b.defaults(function() {
+          value1 = true;
+          return 1;
+        });
+        expect(callback()).to.equal(1);
+        expect(value1).to.be.true;
+      });
+
+      it('should not modify a function when only it is passed in', function() {
+        var value1 = false;
+        var callback = b.defaults(function() {
+          value1 = true;
+          return 1;
+        });
+        expect(callback()).to.equal(1);
+        expect(value1).to.be.true;
+      });
+    });
+
+    describe('2 argument', function() {
+      it('should return a function that returns nothing when last passed is not a function',
+      function() {
+        [null, undefined, {}, 'test'].forEach(function(passing) {
+          var callback = b.defaults('test', passing);
+          expect(callback()).to.be.null;
+        });
+      });
+
+      it('should not set a functions default value when the param is specified', function() {
+        var callback = b.defaults('test', function(param1) {
+          return param1;
+        });
+        expect(callback('test2')).to.equal('test2');
+      });
+
+      it('should set a functions default value when it is specified', function() {
+        var test = function(param1) {
+          return param1;
+        };
+
+        var callback = b.defaults('test', test);
+        expect(callback()).to.equal('test');
+      });
+    });
+
+    describe('poly argument', function() {
+      // The null return error case should be properly tested now.
+
+      it('should not set a functions default values when their params are specified', function() {
+        var callback = b.defaults('test1', 'test2', 'test3', function(param1, param2, param3) {
+          return [param1, param2, param3];
+        });
+        expect(callback('testA', 'testB', 'testC')).to.deep.equal(['testA', 'testB', 'testC']);
+      });
+
+      it('should set the params whose values were not specified', function() {
+        var test = function(param1, param2, param3) {
+          return [param1, param2, param3];
+        };
+
+        var callback = b.defaults('test1', 'test2', 'test3', test);
+        expect(callback('testA', 'testB')).to.deep.equal(['testA', 'testB', 'test3']);
+        expect(callback('testA')).to.deep.equal(['testA', 'test2', 'test3']);
+        expect(callback()).to.deep.equal(['test1', 'test2', 'test3']);
+
+        // Don't forget that undefineds can be manually sent:
+        expect(callback('testA', undefined, 'testC')).to.deep.equal(['testA', 'test2', 'testC']);
+        expect(callback(undefined, undefined, 'testC')).to.deep.equal(['test1', 'test2', 'testC']);
+      });
+
+      it('should allow partial default value setting', function() {
+        var test = function(param1, param2, param3) {
+          return [param1, param2, param3];
+        };
+
+        var callback = b.defaults('test1', 'test2', test);
+        expect(callback('testA', 'testB')).to.deep.equal(['testA', 'testB', undefined]);
+        expect(callback('testA')).to.deep.equal(['testA', 'test2', undefined]);
+        expect(callback()).to.deep.equal(['test1', 'test2', undefined]);
+
+        var callback = b.defaults(undefined, 'test2', 'test3', test);
+        expect(callback('testA', 'testB')).to.deep.equal(['testA', 'testB', 'test3']);
+        expect(callback(undefined, 'testB')).to.deep.equal([undefined, 'testB', 'test3']);
+        expect(callback()).to.deep.equal([undefined, 'test2', 'test3']);
+      });
+    });
+
+    it('should preserve "this" from passed', function() {
+      var callback = b.defaults(1, function(y) {
+        return this.x + y;
+      });
+      expect(callback.call({
+        x: 1
+      })).to.be.equal(2);
+    });
+  });
 });
