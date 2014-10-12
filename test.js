@@ -211,4 +211,70 @@ describe('boss', function() {
       })).to.be.equal(2);
     });
   });
+
+  // I have a feeling that this needs to be tested more thoroughly.
+  describe('restize', function() {
+    it('should do nothing when no restize functions has been passed', function() {
+      expect(b.restize).to.not.throw();
+    });
+
+    // Tests a parameter specified and then the rest parameter.
+    describe('push restize', function() {
+      // Good for testing purposes, but due to JSs function parameter limit this would be a bad
+      // idea in production code.
+      var push = b.restize(function(array, _items) {
+        _items.forEach(function(item) {
+          array.push(item);
+        });
+      });
+
+      it('should handle no arguments', function() {
+        expect(push).to.not.throw();
+      });
+
+      it('should be able to push onto an empty list', function() {
+        var res = [];
+        push(res, 1);
+        expect(res).to.deep.equal([1]);
+      });
+
+      it('should push no items on when none are specified', function() {
+        var res = [1, 2, 3];
+        push(res);
+        expect(res).to.deep.equal([1, 2, 3]);
+      });
+
+      it('should push no items with an initial empty list', function() {
+        var res = [];
+        push(res);
+        expect(res).to.deep.equal([]);
+      });
+
+      it('should be able to push multiple items onto the list', function() {
+        var res = [];
+        push(res, 1, 2, 3);
+        expect(res).to.deep.equal([1, 2, 3]);
+      });
+    });
+
+    // This tests just the rest parameter being specified.
+    describe('sumArray restize', function() {
+      var sumArray = b.restize(function(_items) {
+        var total = 0;
+        _items[0].forEach(function(item) {
+          total += item;
+        });
+
+        return total;
+      });
+
+      it('should return 0 for an empty array', function() {
+        expect(sumArray([])).to.equal(0);
+      });
+
+      it('should the sum of the array', function() {
+        expect(sumArray([1,2,3])).to.equal(6);
+      });
+    });
+  });
 });

@@ -46,6 +46,17 @@ the value automatically becomes the default.
 
 **Returns**: function, The function wrapped with default values.
 
+restize(callback) 
+-----------------------------
+Defines an end parameter for a passed in function that will store all non specified arguments
+in an array. If all arguments are specified, the rest parameter will be an empty list.
+
+**Parameters**
+
+**callback**: function, The function to wrap.
+
+**Returns**: function, The function wrapped with a restize parameter added.
+
 
 ---
 
