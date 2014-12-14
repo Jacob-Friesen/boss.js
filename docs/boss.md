@@ -46,6 +46,20 @@ the value automatically becomes the default.
 
 **Returns**: function, The function wrapped with default values.
 
+defaultObj(defaults, callback) 
+-----------------------------
+Defines default values for a configuration object sent in to initialize an object. When this
+object is initialized and properties are not specified like in the defaults, they are
+overrided by values in the defaults.
+
+**Parameters**
+
+**defaults**: Object, The default values object.
+
+**callback**: function, The function (usually an object constructor) to wrap.
+
+**Returns**: function, The function wrapped with default values.
+
 
 ---
 

@@ -211,4 +211,33 @@ describe('boss', function() {
       })).to.be.equal(2);
     });
   });
+
+  describe('defaultObj', function() {
+    var ObjectA;
+    beforeEach(function() {
+      ObjectA = b.defaultObj({
+        message: 'test'
+      }, function(opt) {
+        var self = opt;
+        
+        self.getMessage = function() {
+          return self.message;
+        };
+        
+        return self;
+      });
+    });
+
+    it('should use default specifications', function() {
+      var newObject = ObjectA();
+      expect(newObject.getMessage()).to.be.equal('test');
+    });
+
+    it('should not use default specifications when specified', function() {
+      var newObject = ObjectA({
+        message: 'test2'
+      });
+      expect(newObject.getMessage()).to.be.equal('test2');
+    });
+  });
 });

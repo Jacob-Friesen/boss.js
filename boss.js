@@ -83,5 +83,33 @@ module.exports = (function() {
     };
   };
 
+  /**
+   * @description
+   * Defines default values for a configuration object sent in to initialize an object. When this
+   * object is initialized and properties are not specified like in the defaults, they are
+   * overrided by values in the defaults.
+   *
+   * @param {Object} defaults The default values object.
+   * @param {function} callback The function (usually an object constructor) to wrap.
+   *
+   * @returns {function()} The function wrapped with default values.
+   */
+  self.defaultObj = function(defaults, callback) {
+    defaults = (defaults !== undefined) ? defaults : {};
+
+    return function(currentObj) {
+      currentObj = (currentObj !== undefined) ? currentObj : {};
+
+      var newDefaults = {};
+      [defaults, currentObj].forEach(function(obj) {
+        for (var property in obj) {
+          newDefaults[property] = obj[property];
+        }
+      });
+
+      return callback(newDefaults);
+    };
+  };
+
   return self;
 })();
