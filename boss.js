@@ -107,7 +107,7 @@ module.exports = (function() {
         }
       });
 
-      return callback(newDefaults);
+      return callback && callback(newDefaults);
     }
   };
 

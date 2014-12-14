@@ -212,7 +212,86 @@ describe('boss', function() {
     });
   });
 
-  // I have a feeling that this needs to be tested more thoroughly.
+  describe('defaultObj', function() {
+    var originalObject;
+    beforeEach(function() {
+      originalObject = function(opt) {
+        var self = opt;
+        
+        self.area = function() {
+          return self.x * self.y * self.z;
+        };
+
+        self.flatArea = function() {
+          return self.x * self.y;
+        };
+
+        self.getX = function() {
+          return self.x;
+        };
+        
+        return self;
+      };
+    });
+
+    it('should return a function that returns undefined when called when passed no callback',
+    function() {
+      var NewObject = b.defaultObj();
+      expect(NewObject()).to.be.undefined;
+
+      var NewObject = b.defaultObj({x: 1});
+      expect(NewObject()).to.be.undefined;
+    });
+
+    it('should do no overrides when the defaults object is empty', function() {
+      var NewObject = b.defaultObj({}, originalObject);
+      var newObject = NewObject();
+      expect(newObject.getX()).to.be.undefined;
+
+      newObject = NewObject({
+        x: 1
+      });
+      expect(newObject.getX()).to.be.equal(1);
+    });
+
+    it('should only override the defaults when they are not specified', function() {
+      var NewObject = b.defaultObj({
+        x: 2,
+        y: 3
+      }, originalObject);
+
+      var newObject = NewObject();
+      expect(newObject.flatArea()).to.be.equal(6);
+
+      newObject = NewObject({
+        x: 3,
+      });
+      expect(newObject.flatArea()).to.be.equal(9);
+
+      newObject = NewObject({
+        x: 3,
+        y: 4,
+      });
+      expect(newObject.flatArea()).to.be.equal(12);
+    });
+
+    it('should be able to override all values', function() {
+      var NewObject = b.defaultObj({
+        x: 2,
+        y: 3,
+        z: 4
+      }, originalObject);
+
+      var newObject = NewObject();
+      expect(newObject.area()).to.be.equal(24);
+
+      newObject = NewObject({
+        y: 1,
+      });
+      expect(newObject.area()).to.be.equal(8);
+    });
+  });
+
   describe('restize', function() {
     it('should do nothing when no restize functions has been passed', function() {
       expect(b.restize).to.not.throw();
@@ -275,35 +354,6 @@ describe('boss', function() {
       it('should the sum of the array', function() {
         expect(sumArray([1,2,3])).to.equal(6);
       });
-    });
-  });
-
-  describe('defaultObj', function() {
-    var ObjectA;
-    beforeEach(function() {
-      ObjectA = b.defaultObj({
-        message: 'test'
-      }, function(opt) {
-        var self = opt;
-        
-        self.getMessage = function() {
-          return self.message;
-        };
-        
-        return self;
-      });
-    });
-
-    it('should use default specifications', function() {
-      var newObject = ObjectA();
-      expect(newObject.getMessage()).to.be.equal('test');
-    });
-
-    it('should not use default specifications when specified', function() {
-      var newObject = ObjectA({
-        message: 'test2'
-      });
-      expect(newObject.getMessage()).to.be.equal('test2');
     });
   });
 });
