@@ -1,7 +1,7 @@
 {
   "name": "boss.js",
-  "version": "0.5.0",
-  "description": "Helps you code JavaScript at a boss level",
+  "version": "0.5.1",
+  "description": "Helps you code JavaScript at a boss level, by providing things like default function parameters.",
   "main": "boss.js",
   "scripts": {
     "test": "node runtest.js"
