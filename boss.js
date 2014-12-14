@@ -108,6 +108,32 @@ module.exports = (function() {
       });
 
       return callback(newDefaults);
+    }
+  };
+
+  /**
+   * @description
+   * Defines an end parameter for a passed in function that will store all non specified arguments
+   * in an array. If all arguments are specified, the rest parameter will be an empty list.
+   *
+   * @param {function()} callback The function to wrap.
+   *
+   * @returns {function()} The function wrapped with a restize parameter added.
+   */
+  self.restize = function(callback) {
+    return function() {
+      var args = Array.prototype.slice.call(arguments);
+
+      // Take all the specified arguments and send them directly.
+      var number = (arguments.length - 1) - callback.length,
+          toSend = args.slice(0, number).concat([args.slice(number)]);
+
+      // Empty rest param when there is not enough arguments.
+      if (toSend.length === 1) {
+        toSend.push([]);
+      }
+
+      return callback.apply(null, toSend);
     };
   };
 
