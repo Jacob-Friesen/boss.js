@@ -3,14 +3,21 @@ var expect = chai.expect;
 
 var b = require('./boss');
 describe('boss', function() {
+  'use strict';
+
   describe('constants', function() {
     var testConstant = function(name, constant, newValue) {
       b.constants.add(name, constant);
       expect(b.constants[name]).to.deep.equal(constant);
-      b.constants.STR = newValue;
-      expect(b.constants[name]).to.deep.equal(constant);
-      delete b.constants[name];
-      expect(b.constants[name]).to.deep.equal(constant);
+
+      try {
+        b.constants[name] = newValue;
+        expect(b.constants[name]).to.deep.equal(constant);
+        delete b.constants[name];
+        expect(b.constants[name]).to.deep.equal(constant);
+      } catch(e) {
+        expect(e.toString().indexOf('TypeError') > -1).to.be.true;
+      }
     };
 
     it('should start with no constants', function() {

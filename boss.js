@@ -4,6 +4,8 @@
  * for more details.
  */
 module.exports = (function() {
+  'use strict';
+
   var self = {};
 
   /**
