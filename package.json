@@ -1,6 +1,6 @@
 {
   "name": "boss.js",
-  "version": "0.5.3",
+  "version": "0.5.4",
   "description": "Helps you code JavaScript at a boss level, by providing things like default function parameters.",
   "main": "boss.js",
   "scripts": {

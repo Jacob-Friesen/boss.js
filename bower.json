@@ -1,0 +1,30 @@
+{
+  "name": "boss.js",
+  "main": "boss.js",
+  "version": "0.5.4",
+  "homepage": "https://github.com/Jacob-Friesen/boss.js",
+  "description": "Helps you code JavaScript at a boss level, by providing things like default function parameters.",
+  "moduleType": [
+    "globals",
+    "node"
+  ],
+  "keywords": [
+    "javascript",
+    "js",
+    "utility",
+    "boss",
+    "harmony",
+    "es6"
+  ],
+  "authors": [
+    "Jacob Friesen"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
