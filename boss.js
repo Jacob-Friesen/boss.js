@@ -3,7 +3,7 @@
  * An object that provides utility functions to JS. See https://github.com/Jacob-Friesen/boss.js
  * for more details.
  */
-module.exports = (function() {
+var boss = (function() {
   'use strict';
 
   var self = {};
@@ -141,3 +141,8 @@ module.exports = (function() {
 
   return self;
 })();
+
+// Make it work in Node.js
+if (typeof module !== 'undefined' && module.exports) {
+  module.exports = boss;
+}
