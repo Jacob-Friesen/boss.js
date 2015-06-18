@@ -7,7 +7,13 @@ Helps you code JavaScript at a boss level. Provides a set of utilities intended 
 
 Install
 -------
+Via NPM:
+    
     npm install boss.js
+
+Via Bower:
+
+    bower install boss.js
 
 Example
 -------

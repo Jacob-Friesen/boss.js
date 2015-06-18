@@ -1,7 +1,7 @@
 {
   "name": "boss.js",
   "main": "boss.js",
-  "version": "0.5.4",
+  "version": "0.5.5",
   "homepage": "https://github.com/Jacob-Friesen/boss.js",
   "description": "Helps you code JavaScript at a boss level, by providing things like default function parameters.",
   "moduleType": [
